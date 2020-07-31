@@ -6,11 +6,29 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FontAwesome, Entypo } from "@expo/vector-icons";
 
 import Home from "./containers/Home";
+import News from "./components/News";
+import Bookmark from "./containers/Bookmark";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const NewsNav = () => {
+  return (
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="DetailNews" component={News} />
+    </Stack.Navigator>
+  );
+};
 
+const BookmarkNav = () => {
+  return (
+    <Stack.Navigator initialRouteName="Bookmark">
+      <Stack.Screen name="Bookmark" component={Bookmark} />
+      <Stack.Screen name="DetailNews" component={News} />
+    </Stack.Navigator>
+  );
+};
 const Router = () => {
   return (
     <NavigationContainer>
@@ -33,8 +51,8 @@ const Router = () => {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Bookmark" component={Home} />
+        <Tab.Screen name="Home" component={NewsNav} />
+        <Tab.Screen name="Bookmark" component={BookmarkNav} />
       </Tab.Navigator>
     </NavigationContainer>
   );

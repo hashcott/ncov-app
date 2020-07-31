@@ -2,13 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-import TopNews from "../components/TopNews/TopNews";
 import PopularNews from "../components/PopularNews/PopularNews";
 
-const Home = () => {
+const Bookmark = () => {
   return (
     <View style={styles.container}>
-      <TopNews />
       <PopularNews />
     </View>
   );
@@ -18,7 +16,7 @@ const mapStateToProps = (state) => {
   return { ...state.example };
 };
 
-export default connect(mapStateToProps, { createExample })(Home);
+export default connect(mapStateToProps, { createExample })(Bookmark);
 
 const styles = StyleSheet.create({
   container: {
