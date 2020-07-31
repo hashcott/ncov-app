@@ -3,12 +3,13 @@ import { StyleSheet, Text, View } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import TopNews from "../components/TopNews";
+import PopularNews from "../components/PopularNews";
 
 const Home = () => {
   return (
     <View style={styles.container}>
       <TopNews />
-      <Text>Home</Text>
+      <PopularNews />
     </View>
   );
 };

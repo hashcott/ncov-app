@@ -1,62 +1,58 @@
 import React from "react";
 import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
-import FlatListNewsItem from "./FlatListNewsItem";
+import PopularNewsItem from "./PopularNewsItem";
 let data = [
   {
     id: "1",
     title: "Post 1",
     thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
+    content: "hellosffffffffffffffffffffffffffffffffffffff",
   },
   {
     id: "2",
     title: "Post 2",
     thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
+    content: "helloffffffssssssssssssssssssssssssssssss",
   },
   {
     id: "3",
     title: "Post 3",
     thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
+    content: "hellosfffffffffffffffffffffffffffffffffffffffffffff",
   },
   {
     id: "4",
     title: "Post 4",
     thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
+    content: "hellofssssssssssssssssssssssssssssssssssssss",
   },
 ];
-const TopNews = () => {
+const PopularNews = () => {
   const _renderItem = ({ item }) => {
-    return <FlatListNewsItem {...item} />;
+    return <PopularNewsItem {...item} />;
   };
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.h2}>HOT NEWS</Text>
+    <View style={styles.container}>
+      <Text style={styles.h2}>POPULAR NEWS</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={_renderItem}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
-export default TopNews;
+export default PopularNews;
 
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
-    marginLeft: 20,
-    justifyContent: "center",
-    marginVertical: 20,
+    marginHorizontal: 10,
   },
   h2: {
     fontWeight: "bold",
     fontSize: 20,
-    marginVertical: 10,
   },
 });
