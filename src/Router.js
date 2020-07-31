@@ -8,11 +8,11 @@ import { FontAwesome, Entypo } from "@expo/vector-icons";
 import Home from "./containers/Home";
 import News from "./components/News";
 import Bookmark from "./containers/Bookmark";
+import { navigationRef } from "./NavigationRef";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-const navOptionHandler = (navigation) => ({ header: null });
 const NewsNav = () => {
   return (
     <Stack.Navigator
@@ -38,7 +38,7 @@ const BookmarkNav = () => {
 };
 const Router = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({

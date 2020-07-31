@@ -34,10 +34,9 @@ let data = [
     content: "hello",
   },
 ];
-const TopNews = ({ navigate }) => {
-  console.log(navigate);
+const TopNews = () => {
   const _renderItem = ({ item }) => {
-    return <FlatListNewsItem {...item} navigate={navigate} />;
+    return <FlatListNewsItem {...item} />;
   };
   return (
     <SafeAreaView style={styles.container}>

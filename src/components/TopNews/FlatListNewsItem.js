@@ -7,8 +7,9 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import * as RootNavigation from "../../NavigationRef";
 const _WIDTH = Dimensions.get("window").width;
-const FlatListNewsItem = ({ id, title, thumbnail, navigate }) => {
+const FlatListNewsItem = ({ id, title, thumbnail }) => {
   return (
     <View style={{ ...styles.card }}>
       <ImageBackground
@@ -17,7 +18,7 @@ const FlatListNewsItem = ({ id, title, thumbnail, navigate }) => {
         style={styles.image}
       >
         <TouchableOpacity
-          onPress={() => navigate("DetailNews", { id })}
+          onPress={() => RootNavigation.navigate("DetailNews", { id })}
           style={styles.container}
         >
           <Text style={styles.title}>{title}</Text>

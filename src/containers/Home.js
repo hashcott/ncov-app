@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import TopNews from "../components/TopNews/TopNews";
 import PopularNews from "../components/PopularNews/PopularNews";
 
-const Home = ({ navigation: { navigate } }) => {
+const Home = () => {
   return (
     <View style={styles.container}>
-      <TopNews navigate={navigate} />
-      <PopularNews navigate={navigate} />
+      <TopNews />
+      <PopularNews />
     </View>
   );
 };
