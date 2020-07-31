@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const Home = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={styles.container}>
       <Text>Home</Text>
     </View>
   );
@@ -17,4 +17,11 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { createExample })(Home);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
