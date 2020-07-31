@@ -5,9 +5,10 @@ import {
   View,
   Dimensions,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 const _WIDTH = Dimensions.get("window").width;
-const FlatListNewsItem = ({ id, title, thumbnail }) => {
+const FlatListNewsItem = ({ id, title, thumbnail, navigate }) => {
   return (
     <View style={{ ...styles.card }}>
       <ImageBackground
@@ -15,7 +16,12 @@ const FlatListNewsItem = ({ id, title, thumbnail }) => {
         source={{ uri: thumbnail }}
         style={styles.image}
       >
-        <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity
+          onPress={() => navigate("DetailNews", { id })}
+          style={styles.container}
+        >
+          <Text style={styles.title}>{title}</Text>
+        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
@@ -24,9 +30,13 @@ const FlatListNewsItem = ({ id, title, thumbnail }) => {
 export default FlatListNewsItem;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   card: {
     width: _WIDTH - 60,
     marginRight: 20,
+    backgroundColor: "#fff",
   },
   image: {
     flex: 1,

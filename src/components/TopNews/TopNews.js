@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  FlatList,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import FlatListNewsItem from "./FlatListNewsItem";
 let data = [
   {
@@ -27,9 +34,10 @@ let data = [
     content: "hello",
   },
 ];
-const TopNews = () => {
+const TopNews = ({ navigate }) => {
+  console.log(navigate);
   const _renderItem = ({ item }) => {
-    return <FlatListNewsItem {...item} />;
+    return <FlatListNewsItem {...item} navigate={navigate} />;
   };
   return (
     <SafeAreaView style={styles.container}>

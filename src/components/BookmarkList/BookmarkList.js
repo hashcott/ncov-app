@@ -33,7 +33,7 @@ const BookmarkList = () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.h2}>POPULAR NEWS</Text>
+      <Text style={styles.h2}>BOOKMARK</Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}

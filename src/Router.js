@@ -12,9 +12,13 @@ import Bookmark from "./containers/Bookmark";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const navOptionHandler = (navigation) => ({ header: null });
 const NewsNav = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="DetailNews" component={News} />
     </Stack.Navigator>
@@ -23,7 +27,10 @@ const NewsNav = () => {
 
 const BookmarkNav = () => {
   return (
-    <Stack.Navigator initialRouteName="Bookmark">
+    <Stack.Navigator
+      initialRouteName="Bookmark"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Bookmark" component={Bookmark} />
       <Stack.Screen name="DetailNews" component={News} />
     </Stack.Navigator>
