@@ -4,15 +4,26 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FontAwesome, Entypo } from "@expo/vector-icons";
+import { enableScreens } from "react-native-screens";
 
 import Home from "./containers/Home";
 import News from "./components/News";
 import Bookmark from "./containers/Bookmark";
 import { navigationRef } from "./NavigationRef";
-
+enableScreens();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const getTabBarVisibility = (route) => {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : "";
+  if (routeName === "DetailNews") {
+    return false;
+  }
+
+  return true;
+};
 const NewsNav = () => {
   return (
     <Stack.Navigator
@@ -58,8 +69,20 @@ const Router = () => {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Home" component={NewsNav} />
-        <Tab.Screen name="Bookmark" component={BookmarkNav} />
+        <Tab.Screen
+          name="Home"
+          component={NewsNav}
+          options={({ route }) => ({
+            tabBarVisible: getTabBarVisibility(route),
+          })}
+        />
+        <Tab.Screen
+          name="Bookmark"
+          component={BookmarkNav}
+          options={({ route }) => ({
+            tabBarVisible: getTabBarVisibility(route),
+          })}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

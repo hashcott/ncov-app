@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import * as RootNavigation from "../../NavigationRef";
 const _WIDTH = Dimensions.get("window").width;
-const FlatListNewsItem = ({ id, title, thumbnail }) => {
+const FlatListNewsItem = ({ id, title, thumb }) => {
   return (
     <View style={{ ...styles.card }}>
       <ImageBackground
         imageStyle={{ borderRadius: 25 }}
-        source={{ uri: thumbnail }}
+        source={{ uri: thumb }}
         style={styles.image}
       >
         <TouchableOpacity
@@ -45,10 +45,12 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
-    marginTop: "60%",
     marginHorizontal: 30,
+    opacity: 1,
+    alignSelf: "center",
+    paddingTop: 40,
   },
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,34 +7,14 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { connect } from "react-redux";
+import { fetch_top } from "../../actions";
 import FlatListNewsItem from "./FlatListNewsItem";
-let data = [
-  {
-    id: "1",
-    title: "Post 1",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
-  },
-  {
-    id: "2",
-    title: "Post 2",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
-  },
-  {
-    id: "3",
-    title: "Post 3",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
-  },
-  {
-    id: "4",
-    title: "Post 4",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hello",
-  },
-];
-const TopNews = () => {
+
+const TopNews = (props) => {
+  useEffect(() => {
+    props.fetch_top();
+  }, []);
   const _renderItem = ({ item }) => {
     return <FlatListNewsItem {...item} />;
   };
@@ -42,8 +22,8 @@ const TopNews = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.h2}>HOT NEWS</Text>
       <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
+        data={props.data}
+        keyExtractor={(item) => `${item.id}`}
         renderItem={_renderItem}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -51,8 +31,8 @@ const TopNews = () => {
     </SafeAreaView>
   );
 };
-
-export default TopNews;
+const mapStateToProps = (state) => ({ data: state.topNews.data });
+export default connect(mapStateToProps, { fetch_top })(TopNews);
 
 const styles = StyleSheet.create({
   container: {

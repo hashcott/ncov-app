@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
-import ExampleReducer from "./ExampleReducer";
+import NewsReducer from "./NewsReducer";
+import SingleNewsReducer from "./SingleNewsReducer";
+import TopNewReducer from "./TopNewReducer";
 
 export default combineReducers({
-  example: ExampleReducer,
+  news: NewsReducer,
+  topNews: TopNewReducer,
+  singleNews: SingleNewsReducer,
 });

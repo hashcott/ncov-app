@@ -1,50 +1,50 @@
-import React from "react";
-import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  FlatList,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import PopularNewsItem from "./PopularNewsItem";
-let data = [
-  {
-    id: "1",
-    title: "Post 1",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hellosffffffffffffffffffffffffffffffffffffff",
-  },
-  {
-    id: "2",
-    title: "Post 2",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "helloffffffssssssssssssssssssssssssssssss",
-  },
-  {
-    id: "3",
-    title: "Post 3",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hellosfffffffffffffffffffffffffffffffffffffffffffff",
-  },
-  {
-    id: "4",
-    title: "Post 4",
-    thumbnail: "https://via.placeholder.com/320",
-    content: "hellofssssssssssssssssssssssssssssssssssssss",
-  },
-];
-const PopularNews = () => {
+import { connect } from "react-redux";
+import { fetch_all } from "../../actions";
+
+const PopularNews = (props) => {
+  const [page, setPage] = useState(2);
   const _renderItem = ({ item }) => {
     return <PopularNewsItem {...item} />;
+  };
+  useEffect(() => {
+    props.fetch_all(1);
+  }, []);
+  const getNews = async () => {
+    props.fetch_all(page);
+    setPage(page + 1);
   };
   return (
     <View style={styles.container}>
       <Text style={styles.h2}>POPULAR NEWS</Text>
       <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
+        data={props.data}
+        keyExtractor={(item) => `${item.id}`}
         renderItem={_renderItem}
         showsVerticalScrollIndicator={false}
+        onEndReached={getNews}
+        onEndReachedThreshold={1}
+        ListFooterComponent={
+          <ActivityIndicator size="large" loading={props.loading} />
+        }
       />
     </View>
   );
 };
-
-export default PopularNews;
+const mapStateToProps = (state) => ({
+  data: state.news.data,
+  loading: state.loading,
+});
+export default connect(mapStateToProps, { fetch_all })(PopularNews);
 
 const styles = StyleSheet.create({
   container: {
