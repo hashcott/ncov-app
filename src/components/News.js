@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { connect } from "react-redux";
-import { fetch_news } from "../actions";
+import { fetch_news, createBookmark } from "../actions";
 
 import { AntDesign, Feather } from "@expo/vector-icons";
 import Markdown from "react-native-simple-markdown";
@@ -18,11 +18,20 @@ import * as RootNavigation from "../NavigationRef";
 import { ScrollView } from "react-native-gesture-handler";
 import moment from "moment";
 
-const News = ({ loading, route, title, content, datetime, fetch_news }) => {
+const News = ({
+  bookmarks,
+  loading,
+  route,
+  title,
+  content,
+  datetime,
+  fetch_news,
+  createBookmark,
+  ids,
+}) => {
   useEffect(() => {
     fetch_news(route.params.id);
   }, []);
-  console.log(datetime + "oke");
   const renderLoad = () => {
     if (loading) {
       return (
@@ -39,7 +48,7 @@ const News = ({ loading, route, title, content, datetime, fetch_news }) => {
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "100", marginBottom: 20 }}>
             <AntDesign name="clockcircleo" style={styles.time} />{" "}
-            {moment(datetime).format("LLL")}
+            {moment(parseInt(datetime) * 1000).format("DD/MM/YYYY HH:MM:SS")}
           </Text>
           <Markdown style={{ ...markdownStyles }}>{content}</Markdown>
         </ScrollView>
@@ -52,14 +61,16 @@ const News = ({ loading, route, title, content, datetime, fetch_news }) => {
         <View style={styles.action}>
           <TouchableOpacity
             onPress={() => {
-              RootNavigation.navigate("Home");
+              RootNavigation.pop();
             }}
           >
             <AntDesign name="left" size={24} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Feather name="bookmark" size={24} color="black" />
-          </TouchableOpacity>
+          {ids.indexOf(route.params.id) === -1 && (
+            <TouchableOpacity onPress={() => createBookmark(route.params.id)}>
+              <Feather name="bookmark" size={24} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       {renderLoad()}
@@ -68,8 +79,10 @@ const News = ({ loading, route, title, content, datetime, fetch_news }) => {
 };
 const mapStateToProps = (state) => ({
   ...state.singleNews,
+  ids: state.bookmarks.ids,
+  bookmarks: state.bookmarks,
 });
-export default connect(mapStateToProps, { fetch_news })(News);
+export default connect(mapStateToProps, { fetch_news, createBookmark })(News);
 
 const markdownStyles = {
   heading1: {
@@ -107,7 +120,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 0.9,
-    padding: 50,
+    padding: 20,
     paddingTop: 20,
     paddingBottom: 50,
     backgroundColor: "#fff",

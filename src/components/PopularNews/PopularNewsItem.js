@@ -15,7 +15,7 @@ const PopularNewsItem = ({ id, title, thumb, datetime }) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.time}>
           <AntDesign name="clockcircleo" style={styles.time} />{" "}
-          {moment(datetime).format("DD-MM-YYYY HH:MM:SS")}
+          {moment(parseInt(datetime) * 1000).format("DD-MM-YYYY HH:MM:SS")}
         </Text>
       </View>
     </TouchableOpacity>
