@@ -15,13 +15,16 @@ const {
   FETCH_BOOKMARK,
   DELETE_BOOKMARK,
   FETCH_BOOKMARK_DATA,
+  FETCH_TIMELINE,
+  FETCH_TIMELINE_SUCCESS,
+  FETCH_TIMELINE_FAILURE,
 } = require("./type");
 
 // NEWS ALL IN PAGE
 export const fetch_all = (page) => async (dispatch, getState) => {
   dispatch({ type: FETCH_ALL_NEWS });
   try {
-    let res = await news.get(`?_page=${page}&_limit=10`);
+    let res = await news.get(`/news?_page=${page}&_limit=10`);
     let data = _.concat(getState().news.data, res.data);
     data = _.uniqBy(data, "id");
     dispatch({ type: FETCH_ALL_NEWS_SUCCESS, payload: data });
@@ -30,11 +33,26 @@ export const fetch_all = (page) => async (dispatch, getState) => {
   }
 };
 
+// NEWS ALL IN PAGE
+export const fetch_timeline = (page) => async (dispatch, getState) => {
+  dispatch({ type: FETCH_TIMELINE });
+  try {
+    let res = await news.get(
+      `/timelines?_sort=datetime&_order=asc&_page=${page}&_limit=10`
+    );
+    let data = _.concat(getState().news.data, res.data);
+    data = _.uniqBy(data, "id");
+    dispatch({ type: FETCH_TIMELINE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: FETCH_TIMELINE_FAILURE, payload: error });
+  }
+};
+
 // SINGLE NEWS
 export const fetch_news = (id) => async (dispatch) => {
   dispatch({ type: FETCH_NEWS });
   try {
-    let res = await news.get(`/${id}`);
+    let res = await news.get(`news/${id}`);
     dispatch({ type: FETCH_NEWS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: FETCH_NEWS_FAILURE, payload: error });
@@ -45,7 +63,7 @@ export const fetch_news = (id) => async (dispatch) => {
 export const fetch_top = () => async (dispatch) => {
   dispatch({ type: FETCH_NEWS_TOP });
   try {
-    let res = await news.get(`?_page=1&_limit=10`);
+    let res = await news.get(`/news?_page=1&_limit=10`);
     dispatch({ type: FETCH_NEWS_TOP_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: FETCH_NEWS_TOP_FAILURE, payload: error });
@@ -72,7 +90,7 @@ export const fetchBookmark = () => async (dispatch) => {
 // fetchData
 const fetchData = async (id) => {
   try {
-    let res = await news.get(`/${id}`);
+    let res = await news.get(`news/${id}`);
     return res.data;
   } catch (error) {}
 };

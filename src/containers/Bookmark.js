@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createExample } from "../actions";
-import { connect } from "react-redux";
+
 import BookmarkList from "../components/BookmarkList/BookmarkList";
 
 const Bookmark = () => {
@@ -10,10 +9,6 @@ const Bookmark = () => {
       <BookmarkList />
     </View>
   );
-};
-
-const mapStateToProps = (state) => {
-  return { ...state.example };
 };
 
 export default Bookmark;

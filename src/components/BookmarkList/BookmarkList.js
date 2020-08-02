@@ -9,7 +9,6 @@ const BookmarkList = ({ ids, data, fetchBookmarkData }) => {
   useEffect(() => {
     fetchBookmarkData();
   }, [ids]);
-  console.log(_.uniqBy(data, "id")[0]);
   const _renderItem = ({ item }) => {
     return <BookmarkItem {...item} />;
   };

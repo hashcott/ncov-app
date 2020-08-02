@@ -3,13 +3,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FontAwesome, Entypo } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { enableScreens } from "react-native-screens";
 
 import Home from "./containers/Home";
 import News from "./components/News";
 import Bookmark from "./containers/Bookmark";
 import { navigationRef } from "./NavigationRef";
+import Timeline from "./containers/Timeline";
 enableScreens();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -61,6 +66,15 @@ const Router = () => {
             } else if (route.name === "Bookmark") {
               size = focused ? 28 : 24;
               return <FontAwesome name="bookmark" size={size} color={color} />;
+            } else if (route.name === "Timeline") {
+              size = focused ? 28 : 24;
+              return (
+                <MaterialCommunityIcons
+                  name="timeline"
+                  size={size}
+                  color="black"
+                />
+              );
             }
           },
         })}
@@ -72,6 +86,13 @@ const Router = () => {
         <Tab.Screen
           name="Home"
           component={NewsNav}
+          options={({ route }) => ({
+            tabBarVisible: getTabBarVisibility(route),
+          })}
+        />
+        <Tab.Screen
+          name="Timeline"
+          component={Timeline}
           options={({ route }) => ({
             tabBarVisible: getTabBarVisibility(route),
           })}
