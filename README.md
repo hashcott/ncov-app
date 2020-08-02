@@ -2,9 +2,9 @@
 
 ![PLEASE](https://media.giphy.com/media/3oxHQfvDzo7VhSRy8M/giphy.gif)
 
-# React Native Boilerplate for CoderSchool
+# NCOV-APP-NEW
 
-Simple react-native boilerplate for mobile development.
+## [Expo publish link](https://expo.io/@duchanhstyle/ncov-app)
 
 ## Getting Started
 
